@@ -1,0 +1,2408 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Toko Ikhsan | Member + Withdraw Reward + Thermal Print</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <style>/* =================================================
+   TOKO IKHSAN - MODERN NEON GLASS v2
+   Fully responsive | Performance optimized | Fluid design
+   ================================================= */
+
+/* ---------- RESET & BASE ---------- */
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* CSS variables for theming and performance */
+:root {
+    --bg-dark: #050b14;
+    --bg-card: rgba(8, 18, 28, 0.75);
+    --bg-card-solid: #0a121e;
+    --neon-primary: #0ff0c0;
+    --neon-glow: rgba(15, 240, 192, 0.3);
+    --text-light: #eef5ff;
+    --text-dim: #aac9ff;
+    --border-dim: rgba(15, 240, 192, 0.25);
+    --transition-fast: 0.15s ease;
+    --transition-normal: 0.2s ease;
+    --radius-md: 1rem;
+    --radius-lg: 1.5rem;
+    --radius-xl: 2rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+body {
+    font-family: system-ui, 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, 'Roboto', sans-serif;
+    background: radial-gradient(ellipse at 20% 30%, #0a111f, #020408);
+    color: var(--text-light);
+    min-height: 100vh;
+    padding: clamp(0.75rem, 3vw, 1.5rem);
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Smooth container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* ---------- SCROLLBAR (lightweight) ---------- */
+::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+}
+::-webkit-scrollbar-track {
+    background: #0a1420;
+    border-radius: 8px;
+}
+::-webkit-scrollbar-thumb {
+    background: var(--neon-primary);
+    border-radius: 8px;
+}
+
+/* ---------- GLASS CARD (optimized) ---------- */
+.glass-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(8px); /* light blur for performance */
+    border: 1px solid var(--border-dim);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    transition: border-color var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.glass-card:hover {
+    border-color: var(--neon-primary);
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4);
+}
+
+/* ---------- NEON INPUT (modern) ---------- */
+.neon-input {
+    background: rgba(2, 8, 14, 0.9);
+    border: 1px solid #2a4c5e;
+    border-radius: 60px;
+    padding: 0.75rem 1.25rem;
+    color: var(--text-light);
+    font-size: clamp(0.85rem, 2.5vw, 1rem);
+    width: 100%;
+    transition: all var(--transition-fast);
+    outline: none;
+}
+
+.neon-input:focus {
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 0 2px var(--neon-glow);
+    background: #07101c;
+}
+
+/* ---------- BUTTONS (modern, touch-friendly) ---------- */
+.btn-neon {
+    background: linear-gradient(105deg, #0b1c26, #051016);
+    border: 1px solid rgba(28, 198, 255, 0.5);
+    border-radius: 60px;
+    padding: 0.6rem 1.5rem;
+    color: #d4f5ff;
+    font-weight: 600;
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast), border-color var(--transition-fast);
+    font-size: clamp(0.75rem, 2vw, 0.9rem);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    white-space: nowrap;
+}
+
+.btn-neon:hover {
+    border-color: var(--neon-primary);
+    box-shadow: 0 0 12px var(--neon-glow);
+    transform: translateY(-2px);
+}
+
+.btn-neon:active {
+    transform: translateY(1px);
+}
+
+.btn-danger {
+    background: linear-gradient(105deg, #3a1220, #1f0a12);
+    border-color: #ff6b8b;
+}
+
+.btn-warning {
+    background: linear-gradient(105deg, #4a2e0e, #2c1a04);
+    border-color: #ffaa33;
+}
+
+.btn-sm {
+    padding: 0.4rem 1rem;
+    font-size: 0.75rem;
+}
+
+/* ---------- HEADER & CLOCK (fluid) ---------- */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-bottom: 1.75rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.logo {
+    font-size: clamp(1.4rem, 6vw, 2.2rem);
+    font-weight: 800;
+    background: linear-gradient(135deg, #a5f0e8, #3ccfcf, #c084fc);
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+    letter-spacing: -0.3px;
+}
+
+.clock {
+    background: rgba(0, 20, 25, 0.6);
+    backdrop-filter: blur(4px);
+    padding: 0.4rem 1.2rem;
+    border-radius: 60px;
+    font-family: 'JetBrains Mono', monospace;
+    font-size: clamp(1rem, 4vw, 1.5rem);
+    font-weight: 500;
+    border: 1px solid var(--neon-primary);
+    box-shadow: 0 0 4px var(--neon-glow);
+}
+
+/* ---------- MENU BAR (responsive wrap) ---------- */
+.menu-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border-dim);
+}
+
+.menu-item {
+    padding: 0.5rem 1.2rem;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    transition: all var(--transition-fast);
+    border-radius: 40px;
+    background: rgba(10, 18, 28, 0.4);
+    white-space: nowrap;
+}
+
+.menu-item:hover {
+    color: var(--neon-primary);
+    background: rgba(15, 240, 192, 0.1);
+    transform: translateY(-2px);
+}
+
+.menu-active {
+    border-bottom: 3px solid var(--neon-primary);
+    color: var(--neon-primary);
+    background: rgba(15, 240, 192, 0.12);
+    box-shadow: 0 2px 8px var(--neon-glow);
+}
+
+/* ---------- PANELS (fade animation) ---------- */
+.panel {
+    display: none;
+    animation: fadeSlide 0.25s ease;
+}
+
+.panel.active {
+    display: block;
+}
+
+@keyframes fadeSlide {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ---------- GRID SYSTEM (flexible) ---------- */
+.grid-2 {
+    display: flex;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+}
+
+.grid-2 > div {
+    flex: 1;
+    min-width: 240px;
+}
+
+/* ---------- MEMBER CARDS (touch optimized) ---------- */
+.member-card {
+    background: linear-gradient(115deg, rgba(15, 28, 40, 0.9), rgba(6, 16, 24, 0.95));
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.25rem;
+    margin-bottom: 1rem;
+    border-left: 4px solid var(--neon-primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.member-card:hover {
+    transform: translateX(4px);
+    background: rgba(25, 45, 65, 0.95);
+    border-left-width: 6px;
+}
+
+.member-info {
+    flex: 1;
+}
+
+.member-id {
+    font-family: monospace;
+    background: #0a252a;
+    padding: 0.2rem 0.8rem;
+    border-radius: 40px;
+    font-size: 0.7rem;
+    font-weight: 600;
+    display: inline-block;
+    color: var(--neon-primary);
+}
+
+.member-name {
+    font-size: clamp(1rem, 4vw, 1.3rem);
+    font-weight: 700;
+    margin-top: 0.4rem;
+    color: #ffffffdd;
+}
+
+.member-stats {
+    font-size: 0.7rem;
+    color: var(--text-dim);
+    margin-top: 0.25rem;
+    display: flex;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+/* ---------- LEADERBOARD CARDS ---------- */
+.leaderboard-card {
+    background: linear-gradient(115deg, #0e1824, #09121c);
+    border-radius: var(--radius-lg);
+    padding: 1rem 1.5rem;
+    margin-bottom: 1rem;
+    border: 1px solid rgba(255, 184, 107, 0.4);
+    transition: all var(--transition-fast);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+.gold-rank {
+    border-left: 6px solid #ffd966;
+    background: linear-gradient(135deg, #1f2815, #0f1a0f);
+}
+
+.silver-rank {
+    border-left: 6px solid #c0cbd6;
+}
+
+.bronze-rank {
+    border-left: 6px solid #cd7f56;
+}
+
+/* ---------- MODALS (performance friendly) ---------- */
+.modal,
+.overlay-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.85);
+    backdrop-filter: blur(6px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+    visibility: hidden;
+    opacity: 0;
+    transition: visibility 0.2s, opacity 0.2s;
+}
+
+.modal.active,
+.overlay-modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+.modal-content,
+.overlay-content {
+    background: var(--bg-card-solid);
+    border: 1px solid var(--neon-primary);
+    border-radius: var(--radius-xl);
+    padding: 1.5rem;
+    max-width: 600px;
+    width: 90%;
+    max-height: 85vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 35px rgba(0, 0, 0, 0.5);
+}
+
+.close-btn {
+    cursor: pointer;
+    font-size: 2rem;
+    line-height: 1;
+    color: #cceeff;
+    transition: color var(--transition-fast);
+}
+
+.close-btn:hover {
+    color: #ff6b8b;
+}
+
+/* ---------- TOAST (lightweight) ---------- */
+.toast-notif {
+    position: fixed;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%) scale(0.95);
+    background: #0a1e28e6;
+    backdrop-filter: blur(8px);
+    border-left: 4px solid var(--neon-primary);
+    padding: 0.7rem 1.8rem;
+    border-radius: 60px;
+    z-index: 3000;
+    opacity: 0;
+    transition: opacity 0.2s, transform 0.2s;
+    pointer-events: none;
+    font-weight: 600;
+    font-size: clamp(0.75rem, 2.5vw, 0.9rem);
+    white-space: nowrap;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.toast-notif.show {
+    opacity: 1;
+    transform: translateX(-50%) scale(1);
+}
+
+/* ---------- FAB (floating action) ---------- */
+.fab-reset {
+    position: fixed;
+    bottom: 1.5rem;
+    right: 1.5rem;
+    background: radial-gradient(circle at 30% 20%, #ef4444, #7f1d1d);
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(220, 38, 38, 0.5);
+    z-index: 500;
+    transition: all var(--transition-fast);
+}
+
+.fab-reset:hover {
+    transform: scale(1.05);
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.7);
+}
+
+.fab-reset span {
+    font-size: 1.5rem;
+}
+
+/* ---------- STATS & REWARD CARDS ---------- */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 0.8rem;
+    margin: 1.2rem 0;
+}
+
+.stat-card {
+    background: rgba(0, 20, 30, 0.6);
+    border-radius: 1.25rem;
+    padding: 0.8rem;
+    text-align: center;
+    border: 1px solid #2a6a6a;
+}
+
+.reward-box {
+    background: #191e30aa;
+    backdrop-filter: blur(4px);
+    border: 1px solid #ffb86b;
+    border-radius: 2rem;
+    padding: 1.2rem;
+    margin: 1rem 0;
+    text-align: center;
+}
+
+.reward-value {
+    font-size: clamp(1.3rem, 6vw, 2.2rem);
+    font-weight: bold;
+    color: #ffd966;
+    text-shadow: 0 0 10px rgba(255,217,102,0.4);
+}
+
+/* ---------- CHART (responsive container) ---------- */
+.chart-container {
+    background: #0a111cdd;
+    border-radius: 1.5rem;
+    padding: 1rem;
+    overflow-x: auto;
+    margin-top: 1rem;
+}
+
+.chart-wrapper {
+    min-width: 550px;
+    width: 100%;
+    height: auto;
+    transition: transform 0.2s;
+}
+
+@media (max-width: 640px) {
+    .chart-wrapper {
+        min-width: 400px;
+    }
+}
+
+/* ---------- SETTINGS PANEL ---------- */
+.settings-group {
+    background: rgba(0, 0, 0, 0.35);
+    border-radius: 1.75rem;
+    padding: 1.25rem;
+    margin-bottom: 1.5rem;
+    border: 1px solid #2a5f6a;
+}
+
+.setting-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.8rem;
+    margin-bottom: 1rem;
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed #2a5a6e;
+}
+
+.number-input {
+    background: #0f1622;
+    border: 1px solid var(--neon-primary);
+    border-radius: 2rem;
+    padding: 0.3rem 0.8rem;
+    color: var(--neon-primary);
+    width: 85px;
+    text-align: center;
+}
+
+/* ---------- MISC COMPONENTS ---------- */
+.withdraw-history-item {
+    background: #0a1424dd;
+    border-radius: 1.5rem;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.7rem;
+    border-left: 3px solid #ffb86b;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.backup-bar {
+    margin-top: 1.5rem;
+    padding-top: 1rem;
+    border-top: 1px solid var(--border-dim);
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    flex-wrap: wrap;
+}
+
+.flex-row {
+    display: flex;
+    gap: 0.8rem;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.activity-item {
+    background: rgba(10, 18, 30, 0.7);
+    border-radius: 1.25rem;
+    padding: 0.7rem 1rem;
+    margin-bottom: 0.6rem;
+    border-left: 3px solid var(--neon-primary);
+}
+
+.overlay-item {
+    padding: 0.8rem 1rem;
+    background: #07121e;
+    margin-bottom: 0.6rem;
+    border-radius: 2rem;
+    cursor: pointer;
+    transition: all var(--transition-fast);
+}
+
+.overlay-item:hover {
+    background: rgba(15, 240, 192, 0.15);
+    transform: translateX(4px);
+}
+
+/* Log Item Row Styles for interactive buttons */
+.log-row-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 10px;
+}
+
+/* ---------- RESPONSIVE FINE-TUNING ---------- */
+@media (max-width: 768px) {
+    body {
+        padding: 0.75rem;
+    }
+    
+    .menu-item {
+        padding: 0.35rem 1rem;
+        font-size: 0.75rem;
+    }
+    
+    .member-card {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .toast-notif {
+        white-space: normal;
+        text-align: center;
+        width: 85%;
+    }
+    
+    .btn-neon {
+        padding: 0.5rem 1rem;
+    }
+    
+    .stat-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+@media (max-width: 480px) {
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .modal-content {
+        padding: 1rem;
+    }
+    
+    .setting-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+}
+
+/* ---------- PERFORMANCE & ACCESSIBILITY ---------- */
+@media (prefers-reduced-motion: reduce) {
+    .panel,
+    .member-card,
+    .btn-neon,
+    .menu-item {
+        transition: none;
+        animation: none;
+    }
+}
+
+@media (max-width: 600px) {
+    .glass-card {
+        backdrop-filter: none;
+        background: var(--bg-card-solid);
+    }
+    .clock,
+    .toast-notif {
+        backdrop-filter: none;
+    }
+}
+
+/* Print Styles untuk Thermal 58mm */
+#area-cetak { display: none; }
+
+@media print {
+    body * { visibility: hidden; }
+    #area-cetak, #area-cetak * { visibility: visible; }
+    #area-cetak { position: absolute; left: 0; top: 0; width: 100%; }
+}
+
+/* CSS khusus untuk printer thermal */
+.struk-print {
+    width: 165px; 
+    padding: 2px;
+    font-family: 'Courier New', monospace;
+    text-shadow: 0.2px 0 0 #000; 
+    -webkit-text-stroke: 0.15px black;
+}
+.print-header { text-align: center; margin-bottom: 5px; }
+.print-nama-toko { font-size: 15px; font-weight: 900; text-transform: uppercase; }
+.print-alamat { font-size: 10px; font-weight: 700; }
+.print-divider { font-size: 9px; margin: 4px 0; text-align: center; font-weight: 800; letter-spacing: 1px; }
+.print-info-row { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; margin: 2px 0; }
+.print-item-name { font-size: 11px; font-weight: 900; text-transform: uppercase; margin-top: 3px; }
+.print-item-detail { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; padding-left: 4px; margin-bottom: 2px; }
+.print-total-row { display: flex; justify-content: space-between; font-size: 14px; font-weight: 900; margin: 8px 0; border-top: 1px solid #000; padding-top: 4px; }
+.print-footer { text-align: center; margin-top: 12px; font-size: 8px; font-weight: 700; }
+.print-thanks { font-size: 12px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
+.print-note { font-size: 7px; color: #333; }
+
+@page { size: 58mm auto; margin: 0mm; }
+
+/* =================================================
+   ENHANCED RESPONSIVE FOR TABLET, PHONE & NARROW 9:16
+   Otomatis menyesuaikan 3 device tanpa menghapus apapun di atas
+   ================================================= */
+
+/* Tablet (portrait & landscape) antara 769px dan 1024px */
+@media (min-width: 769px) and (max-width: 1024px) {
+    body {
+        padding: 1.25rem;
+    }
+    .container {
+        max-width: 100%;
+        padding: 0 0.5rem;
+    }
+    .grid-2 {
+        gap: 1.25rem;
+    }
+    .stat-grid {
+        grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+        gap: 1rem;
+    }
+    .member-card {
+        padding: 0.9rem 1.2rem;
+    }
+    .menu-bar {
+        gap: 0.4rem;
+        justify-content: center;
+    }
+    .menu-item {
+        padding: 0.45rem 1.1rem;
+        font-size: 0.85rem;
+    }
+    .modal-content {
+        max-width: 85%;
+        padding: 1.3rem;
+    }
+    .chart-wrapper {
+        min-width: 480px;
+    }
+    .glass-card {
+        backdrop-filter: blur(6px);
+    }
+}
+
+/* Semua ponsel & tablet kecil (max-width: 768px) tambahan penyesuaian agar lapang */
+@media (max-width: 768px) {
+    .header {
+        flex-direction: column;
+        align-items: stretch;
+        text-align: center;
+        gap: 0.75rem;
+    }
+    .logo {
+        text-align: center;
+    }
+    .clock {
+        align-self: center;
+        font-size: 1.2rem;
+        padding: 0.3rem 1rem;
+    }
+    .menu-bar {
+        justify-content: center;
+        gap: 0.4rem;
+    }
+    .grid-2 {
+        flex-direction: column;
+        gap: 1.2rem;
+    }
+    .grid-2 > div {
+        min-width: 100%;
+    }
+    .member-card {
+        padding: 0.9rem;
+    }
+    .member-name {
+        font-size: 1.2rem;
+    }
+    .leaderboard-card {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.6rem;
+    }
+    .fab-reset {
+        bottom: 1rem;
+        right: 1rem;
+        width: 2.8rem;
+        height: 2.8rem;
+    }
+    .fab-reset span {
+        font-size: 1.3rem;
+    }
+    .withdraw-history-item {
+        flex-direction: column;
+        gap: 0.4rem;
+    }
+    .backup-bar {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .btn-neon {
+        justify-content: center;
+    }
+    .chart-container {
+        padding: 0.75rem;
+    }
+    .chart-wrapper {
+        min-width: 450px;
+    }
+}
+
+/* Ponsel layar sempit 9:16 (max-width: 480px) dengan sentuhan ekstra riangan */
+@media (max-width: 480px) {
+    body {
+        padding: 0.6rem;
+    }
+    .glass-card {
+        border-radius: var(--radius-md);
+    }
+    .menu-bar {
+        gap: 0.3rem;
+        margin-bottom: 1.2rem;
+    }
+    .menu-item {
+        padding: 0.3rem 0.8rem;
+        font-size: 0.7rem;
+        white-space: nowrap;
+    }
+    .member-card {
+        padding: 0.75rem;
+        margin-bottom: 0.8rem;
+    }
+    .member-stats {
+        font-size: 0.65rem;
+        gap: 0.5rem;
+    }
+    .stat-grid {
+        gap: 0.6rem;
+    }
+    .stat-card {
+        padding: 0.6rem;
+    }
+    .reward-box {
+        padding: 0.8rem;
+    }
+    .reward-value {
+        font-size: 1.6rem;
+    }
+    .modal-content {
+        width: 95%;
+        max-height: 80vh;
+        padding: 0.9rem;
+    }
+    .close-btn {
+        font-size: 1.8rem;
+    }
+    .btn-neon, .btn-sm {
+        padding: 0.45rem 0.9rem;
+        font-size: 0.7rem;
+    }
+    .setting-row {
+        gap: 0.5rem;
+    }
+    .number-input {
+        width: 70px;
+    }
+    .toast-notif {
+        width: 90%;
+        font-size: 0.7rem;
+        padding: 0.5rem 1rem;
+        bottom: 1rem;
+    }
+    .fab-reset {
+        width: 2.5rem;
+        height: 2.5rem;
+        bottom: 0.8rem;
+        right: 0.8rem;
+    }
+    .chart-wrapper {
+        min-width: 320px;
+    }
+    .activity-item, .overlay-item {
+        padding: 0.5rem 0.75rem;
+    }
+    .log-row-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.5rem;
+    }
+}
+
+/* Ponsel sangat kecil (di bawah 380px) pastikan tidak ada yang keluar frame */
+@media (max-width: 380px) {
+    body {
+        padding: 0.4rem;
+    }
+    .menu-item {
+        padding: 0.25rem 0.6rem;
+        font-size: 0.65rem;
+    }
+    .clock {
+        font-size: 0.9rem;
+        padding: 0.2rem 0.8rem;
+    }
+    .member-name {
+        font-size: 1rem;
+    }
+    .stat-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn-neon {
+        width: 100%;
+        justify-content: center;
+    }
+    .flex-row {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    .modal-content {
+        padding: 0.75rem;
+    }
+    .chart-wrapper {
+        min-width: 280px;
+    }
+}
+
+/* Landscape untuk ponsel (max-height: 500px) - lebih hemat ruang vertikal */
+@media (max-width: 896px) and (orientation: landscape) and (max-height: 500px) {
+    body {
+        padding: 0.5rem;
+    }
+    .header {
+        margin-bottom: 0.75rem;
+    }
+    .menu-bar {
+        margin-bottom: 0.8rem;
+    }
+    .member-card {
+        padding: 0.5rem;
+    }
+    .modal-content {
+        max-height: 90vh;
+    }
+    .fab-reset {
+        width: 2.3rem;
+        height: 2.3rem;
+    }
+}
+
+/* Pastikan body & container tidak pernah overflow horizontal */
+body, .container, .panel, .glass-card, .modal-content, .overlay-content {
+    max-width: 100%;
+    overflow-x: hidden;
+}
+
+/* semua gambar, canvas, tabel ikut responsif */
+img, canvas, svg, iframe {
+    max-width: 100%;
+    height: auto;
+}
+
+/* touch target lebih besar untuk tombol di perangkat sentuh */
+@media (pointer: coarse) {
+    .btn-neon, .menu-item, .member-card, .fab-reset, .close-btn, .overlay-item {
+        min-height: 44px;
+    }
+    .btn-neon, .menu-item {
+        min-height: 40px;
+    }
+}
+
+/* meningkatkan keterbacaan di layar kecil */
+@media (max-width: 600px) {
+    p, li, .text-content {
+        font-size: 0.85rem;
+        line-height: 1.45;
+    }
+}
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo">🏪 TOKO IKHSAN | V2.0</div>
+            <div class="clock" id="liveClock">--:--:--</div>
+        </div>
+
+        <div class="menu-bar">
+            <div class="menu-item menu-active" data-menu="dashboard">📊 DASHBOARD</div>
+            <div class="menu-item" data-menu="members">👥 MANAJEMEN</div>
+            <div class="menu-item" data-menu="daftar">📋 DAFTAR & RIWAYAT</div>
+            <div class="menu-item" data-menu="global">🌍 AKTIVITAS GLOBAL</div>
+            <div class="menu-item" data-menu="statistik">📈 STATISTIK DATA</div>
+            <div class="menu-item" data-menu="leader">🏆 TOP LEADER</div>
+            <div class="menu-item" data-menu="withdraw">🎁 WITHDRAW REWARD</div>
+            <div class="menu-item" data-menu="settings">⚙️ PENGATURAN</div>
+        </div>
+
+        <div id="dashboardPanel" class="panel active">
+            <div class="glass-card" style="padding: 24px;">
+                <div class="grid-2">
+                    <div>
+                        <div style="margin-bottom: 15px;">
+                            <label style="color: #0ff0c0; font-weight: bold;">🔍 CARI MEMBER (Enter)</label>
+                            <input type="text" id="searchInputDash" class="neon-input" placeholder="Nama atau Kode" style="margin-top: 8px;">
+                        </div>
+                        <div id="selectedCard" style="display: none; margin-top: 20px; background: rgba(0,255,200,0.1); border-radius: 20px; padding: 16px; border-left: 4px solid #0ff0c0;">
+                            <div style="color: #0ff0c0; font-size: 12px;">MEMBER TERPILIH</div>
+                            <div id="selectedName" style="font-size: 24px; font-weight: bold;"></div>
+                            <div id="selectedCode" style="font-family: monospace;"></div>
+                        </div>
+                        <div style="margin-top: 24px;">
+                            <label style="color: #0ff0c0; font-weight: bold;">💰 NOMINAL TRANSAKSI (Rp)</label>
+                            <input type="text" id="nominalInput" class="neon-input" placeholder="0" style="margin-top: 8px;">
+                        </div>
+                        <button id="simpanBtn" class="btn-neon" style="width: 100%; margin-top: 20px; padding: 14px;">💾 SIMPAN (Enter)</button>
+                    </div>
+                    <div>
+                        <div class="glass-card" style="padding: 20px;">
+                            <h3 style="color: #0ff0c0;">📊 STATISTIK</h3>
+                            <div>Total Member: <span id="totalMember" style="color: #0ff0c0; font-size: 24px; font-weight: bold;">0</span></div>
+                            <div>Total Transaksi: <span id="totalTrans" style="color: #0ff0c0; font-size: 20px; font-weight: bold;">0</span></div>
+                        </div>
+                        <div class="glass-card" style="padding: 20px; margin-top: 16px;">
+                            <h3 style="color: #0ff0c0;">⌨️ SHORTCUT</h3>
+                            <div>F2/F3/F4/F5/F6 : Ganti Menu</div>
+                            <div>F7 : Fokus Pencarian | F8 : Fokus Nominal</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="membersPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <div style="margin-bottom: 24px; border-bottom: 1px solid #0ff0c080; padding-bottom: 16px;">
+                    <h2 style="color: #0ff0c0;">👥 KELOLA MEMBER</h2>
+                    <div class="flex-row" style="margin-top: 16px;">
+                        <div style="display: flex; gap: 8px; flex: 1; align-items: center;">
+                            <input type="text" id="newMemberCode" class="neon-input" placeholder="Kode (otomatis)" style="flex:1;">
+                            <button id="reloadCodeBtn" class="btn-neon" style="border-radius: 30px; padding: 0.75rem 1rem;" title="Reload Kode Otomatis">⟳ Reload</button>
+                        </div>
+                        <input type="text" id="newMemberName" class="neon-input" placeholder="Nama Member *wajib" style="flex:2;">
+                        <button id="tambahMemberBtn" class="btn-neon">+ TAMBAH</button>
+                    </div>
+                </div>
+                <div id="memberListContainer"></div>
+                <div class="backup-bar">
+                    <button id="backupBtn" class="btn-neon">💾 Backup JSON</button>
+                    <label class="btn-neon" style="cursor:pointer;">📂 Import JSON<input type="file" id="importFile" accept=".json" style="display:none;"></label> <button id="importConfirmBtn" class="btn-neon btn-warning" style="display:none;">✅ Konfirmasi Import</button>
+                </div>
+            </div>
+        </div>
+
+        <div id="daftarPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #0ff0c0;">📋 DAFTAR & RIWAYAT MEMBER</h2>
+                <div style="display: flex; gap: 12px; margin-bottom: 20px;">
+                    <input type="text" id="daftarSearchInput" class="neon-input" placeholder="Cari nama/kode" style="flex:1;">
+                    <button id="daftarSearchBtn" class="btn-neon">🔍 Cari</button>
+                </div>
+                <div id="daftarMemberListContainer"></div>
+            </div>
+        </div>
+
+        <div id="globalPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #0ff0c0;">🌍 AKTIVITAS TERAKHIR (SEMUA MEMBER)</h2>
+                <div id="globalActivityList" style="max-height: 450px; overflow-y: auto; margin-top: 20px;"></div>
+            </div>
+        </div>
+
+        <div id="statistikPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #0ff0c0;">📈 GRAFIK TRANSAKSI HARIAN (NOMINAL)</h2>
+                <div class="stats-summary" style="display: flex; gap: 20px; flex-wrap: wrap; margin-bottom: 20px;">
+                    <div class="summary-card" style="background:rgba(0,0,0,0.5); border-radius:20px; padding:12px 20px; flex:1; text-align:center; border:1px solid #0ff0c080;">💰 Total Omzet: <span id="totalOmzet" style="font-size:24px; color:#0ff0c0;">Rp 0</span></div>
+                    <div class="summary-card" style="background:rgba(0,0,0,0.5); border-radius:20px; padding:12px 20px; flex:1; text-align:center; border:1px solid #0ff0c080;">📆 Hari Aktif: <span id="totalDaysActive" style="font-size:24px; color:#0ff0c0;">0</span></div>
+                    <div class="summary-card" style="background:rgba(0,0,0,0.5); border-radius:20px; padding:12px 20px; flex:1; text-align:center; border:1px solid #0ff0c080;">📈 Rata-rata Harian: <span id="avgDaily" style="font-size:24px; color:#0ff0c0;">Rp 0</span></div>
+                </div>
+                <div class="zoom-controls" style="display: flex; gap: 12px; margin-bottom: 12px;">
+                    <button id="zoomInBtn" class="btn-neon btn-sm">🔍+ Perbesar</button>
+                    <button id="zoomOutBtn" class="btn-neon btn-sm">🔍- Perkecil</button>
+                    <button id="resetZoomBtn" class="btn-neon btn-sm">⟳ Reset</button>
+                </div>
+                <div class="chart-container" id="chartContainer">
+                    <div class="chart-wrapper" id="chartWrapper">
+                        <canvas id="dailyChart" width="800" height="400"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="leaderPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #ffb86b;">🏆 TOP LEADER BERDASARKAN REWARD</h2>
+                <div id="leaderListContainer" style="margin-top: 24px;"></div>
+            </div>
+        </div>
+
+        <div id="withdrawPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #0ff0c0;">🎁 WITHDRAW REWARD MEMBER</h2>
+                <div class="grid-2" style="margin-bottom: 20px;">
+                    <div>
+                        <label>🔍 Pilih Member :</label>
+                        <input type="text" id="withdrawSearchInput" class="neon-input" placeholder="Ketik nama/kode" style="margin-top: 8px;">
+                        <button id="withdrawSelectBtn" class="btn-neon btn-sm" style="margin-top: 8px;">🔍 Pilih Member</button>
+                    </div>
+                    <div>
+                        <div id="selectedWithdrawMember" style="background:#0f1a2a; border-radius:20px; padding:12px; text-align:center;">Belum ada member dipilih</div>
+                    </div>
+                </div>
+                <div id="withdrawDetailArea" style="display: none;">
+                    <div class="stat-grid" id="withdrawStatsGrid"></div>
+                    <div class="reward-box" id="rewardInfoBox"></div>
+                    <div style="margin: 16px 0; display: flex; gap: 12px; flex-wrap: wrap;">
+                        <input type="number" id="withdrawAmountInput" class="neon-input" placeholder="Jumlah Reward yang ditarik (Rp)" style="flex:2">
+                        <button id="doWithdrawBtn" class="btn-neon">💰 WITHDRAW</button>
+                        <button id="printMemberStatsBtn" class="btn-neon btn-warning">🖨️ Cetak Statistik (Thermal)</button>
+                    </div>
+                    <h3>📜 Riwayat Withdraw</h3>
+                    <div id="withdrawHistoryList" style="max-height: 250px; overflow-y: auto;"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="settingsPanel" class="panel">
+            <div class="glass-card" style="padding: 24px;">
+                <h2 style="color: #0ff0c0;">⚙️ PENGATURAN SISTEM & CETAK THERMAL</h2>
+                <div class="settings-group">
+                    <h3>🏆 TOP LEADER</h3>
+                    <div class="setting-row">
+                        <span>Jumlah Peringkat yang Ditampilkan (1-30)</span>
+                        <input type="number" id="leaderLimitSetting" class="number-input" min="1" max="30" value="10">
+                        <button id="saveLeaderLimitBtn" class="btn-neon btn-sm">Simpan</button>
+                    </div>
+                    <div class="setting-row">
+                        <span>Persentase Reward Member (%)</span>
+                        <input type="number" id="rewardRateSetting" class="number-input" min="0" max="10" step="0.1" value="0.5">
+                        <button id="saveRewardRateBtn" class="btn-neon btn-sm">Simpan</button>
+                    </div>
+                </div>
+                <div class="settings-group">
+                    <h3>🖨️ KUSTOMISASI STRUK THERMAL (58mm Khusus Withdraw)</h3>
+                    <div class="setting-row">
+                        <span>Lebar Kertas</span>
+                        <select id="thermalPaperWidth">
+                            <option value="58mm" selected>58mm (Spesifik Kasir)</option>
+                            <option value="48mm">48mm</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <span>Jenis Font</span>
+                        <select id="thermalFontFamily">
+                            <option value="'Courier New', monospace" selected>Courier New (Monospace Ala Kasir)</option>
+                            <option value="'Segoe UI', sans-serif">Segoe UI (Modern)</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <span>Ketebalan Font (Font Weight)</span>
+                        <select id="thermalFontWeight">
+                            <option value="900" selected>Extra Bold (900)</option>
+                            <option value="700">Bold (700)</option>
+                            <option value="normal">Normal</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <span>Ketebalan Karakter (Stroke Bold)</span>
+                        <select id="thermalCharacterStroke">
+                            <option value="0.15px" selected>0.15px Black (Rekomendasi)</option>
+                            <option value="0px">Tanpa Stroke</option>
+                        </select>
+                    </div>
+                    <div class="setting-row">
+                        <span>Nama Toko Struk</span>
+                        <input type="text" id="cfgStoreName" class="neon-input" value="TOKO IKHSAN" style="width:200px;">
+                    </div>
+                    <div class="setting-row">
+                        <span>Alamat Toko Struk</span>
+                        <input type="text" id="cfgStoreAddress" class="neon-input" value="Bekasi, West Java, Indonesia" style="width:250px;">
+                    </div>
+                    <div style="text-align: right; margin-top:10px;">
+                        <button id="savePrintSettingsBtn" class="btn-neon">💾 Simpan Kustomisasi</button>
+                    </div>
+                </div>
+                <div class="settings-group" style="border-color:#ff4444;">
+                    <h3 style="color:#ff4444;">⚠️ HARD FACTORY RESET</h3>
+                    <p style="font-size:12px; color:var(--text-dim); margin-bottom:12px;">Menghapus seluruh data dari LocalStorage secara permanen tanpa sisa.</p>
+                    <button id="hardResetAllDataBtn" class="btn-neon btn-danger">🔥 HAPUS SEMUA DATA SISTEM</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="searchOverlayModal" class="overlay-modal">
+        <div class="overlay-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h3 style="color:#0ff0c0;">🔍 Hasil Pencarian Member</h3>
+                <span class="close-btn" id="closeSearchOverlay">&times;</span>
+            </div>
+            <div id="searchOverlayList" style="max-height:350px; overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <div id="detailMemberModal" class="modal">
+        <div class="modal-content">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:15px;">
+                <h3 id="modalMemberTitle" style="color:#0ff0c0;">Detail Riwayat Member</h3>
+                <span class="close-btn" id="closeDetailModal">&times;</span>
+            </div>
+            <div id="modalMemberStats" class="stat-grid"></div>
+            <h4 style="margin-top:15px; margin-bottom:8px; color:#ffb86b;">📋 Log Transaksi</h4>
+            <div id="modalTransactionList" style="max-height:250px; overflow-y:auto;"></div>
+        </div>
+    </div>
+
+    <!-- Area Tersembunyi Khusus Printer Cetak Thermal Internal Page -->
+    <div id="area-cetak"></div>
+
+    <div class="toast-notif" id="toastNotif">Notifikasi Berhasil!</div>
+    <div class="fab-reset" id="fabResetQuick" title="Reset Cepat Menu Terpilih"><span>⟳</span></div>
+
+    <script>
+    // Helper format angka independen sesuai permintaan Anda
+    function formatRupiahStruk(angka) {
+        return parseInt(angka).toLocaleString('id-ID');
+    }
+
+    // Fungsi utama cetak statistik member independen menggunakan window.open()
+    function cetakStatistikMember(dataToko, member) {
+        const totalTransaksi = member.transactions ? member.transactions.length : 0;
+        const totalNominal = (member.transactions || []).reduce((sum, t) => sum + (t.nominal || 0), 0);
+        
+        // Mengubah t.date menjadi t.dateTime jika struktur data menggunakan dateTime
+        let itemsHtml = (member.transactions || []).slice(-5).reverse().map(t => {
+            let tanggalTampil = t.dateTime ? t.dateTime.split(" ")[0] : (t.date ? t.date : new Date().toLocaleDateString('id-ID'));
+            return `
+            <div class="print-item-detail">
+                <span>${tanggalTampil}</span>
+                <span>Rp ${formatRupiahStruk(t.nominal)}</span>
+            </div>`;
+        }).join('');
+
+        // Ambil styling dari konfigurasi yang ada agar hasil cetak di window baru tetap konsisten dan rapi
+        const paperWidth = document.getElementById("thermalPaperWidth") ? document.getElementById("thermalPaperWidth").value : "58mm";
+        const fFamily = document.getElementById("thermalFontFamily") ? document.getElementById("thermalFontFamily").value : "'Courier New', monospace";
+        const fWeight = document.getElementById("thermalFontWeight") ? document.getElementById("thermalFontWeight").value : "900";
+        const cStroke = document.getElementById("thermalCharacterStroke") ? document.getElementById("thermalCharacterStroke").value : "0.15px black";
+
+        const htmlContent = `
+            <div class="struk-print" style="width:${paperWidth === "58mm" ? "165px" : "145px"}; font-family:${fFamily}; font-weight:${fWeight}; -webkit-text-stroke:${cStroke};">
+                <div class="print-header">
+                    <div class="print-nama-toko">${dataToko.nama}</div>
+                    <div class="print-alamat">${dataToko.alamat}</div>
+                </div>
+                <div class="print-divider">-----------------------------</div>
+                <div class="print-info-row"><span>MEMBER:</span><span>${member.name}</span></div>
+                <div class="print-info-row"><span>KODE:</span><span>${member.code}</span></div>
+                <div class="print-divider">-----------------------------</div>
+                <div class="print-info-row"><span>Total Trx:</span><span>${totalTransaksi}x</span></div>
+                <div class="print-info-row"><span>Total Belanja:</span><span>Rp ${formatRupiahStruk(totalNominal)}</span></div>
+                <div class="print-info-row" style="margin-top:5px; font-size:11px;">
+                    <span>SALDO REWARD:</span>
+                    <span>Rp ${formatRupiahStruk(member.rewardBalance || 0)}</span>
+                </div>
+                <div class="print-divider">-----------------------------</div>
+                <div class="print-item-name">5 TRANSAKSI TERAKHIR</div>
+                <div class="print-items">${itemsHtml || '<div class="print-note" style="text-align:center;">Belum ada data</div>'}</div>
+                <div class="print-divider">-----------------------------</div>
+                <div class="print-footer">
+                    <div class="print-thanks">*** TERIMA KASIH ***</div>
+                </div>
+            </div>`;
+
+        // Trigger cetak ke window baru sesuai spesifikasi kode Anda
+        const printWindow = window.open('', '_blank');
+        printWindow.document.write(`
+            <html>
+            <head>
+                <style>
+                    body { margin: 0; padding: 0; }
+                    .struk-print { padding: 2px; text-shadow: 0.2px 0 0 #000; }
+                    .print-header { text-align: center; margin-bottom: 5px; }
+                    .print-nama-toko { font-size: 15px; font-weight: 900; text-transform: uppercase; }
+                    .print-alamat { font-size: 10px; font-weight: 700; }
+                    .print-divider { font-size: 9px; margin: 4px 0; text-align: center; font-weight: 800; letter-spacing: 1px; }
+                    .print-info-row { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; margin: 2px 0; }
+                    .print-item-name { font-size: 11px; font-weight: 900; text-transform: uppercase; margin-top: 3px; }
+                    .print-item-detail { display: flex; justify-content: space-between; font-size: 10px; font-weight: 800; padding-left: 4px; margin-bottom: 2px; }
+                    .print-footer { text-align: center; margin-top: 12px; font-size: 8px; font-weight: 700; }
+                    .print-thanks { font-size: 12px; font-weight: 900; margin-bottom: 5px; text-transform: uppercase; }
+                    @page { size: 58mm auto; margin: 0mm; }
+                </style>
+            </head>
+            <body>${htmlContent}</body>
+            </html>
+        `);
+        printWindow.document.close();
+        printWindow.onload = () => {
+            setTimeout(() => {
+                printWindow.print();
+                printWindow.close();
+            }, 500);
+        };
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const STORAGE_KEY = "toko_ikhsan_members_final";
+
+        // State data aplikasi utama
+        let members = [];
+        let globalActivities = [];
+        let currentSelectedMember = null;
+        let currentWithdrawMember = null;
+        let importedDataTemp = null;
+        let dailyChartInstance = null;
+        let currentDaftarQuery = "";
+
+        // Konfigurasi Printer / Toko Default
+        let config = {
+            nama: "TOKO IKHSAN",
+            alamat: "Bekasi, West Java, Indonesia",
+            kasir: "Ikhsan Admin"
+        };
+
+        // Ambil batasan limit leaderboard & persen rate
+        let leaderLimit = parseInt(localStorage.getItem('leaderLimit')) || 10;
+        let rewardRate = parseFloat(localStorage.getItem('rewardRate')) || 0.5;
+
+        // Load Config dari LocalStorage jika ada
+        if(localStorage.getItem('cfg_store_name')) config.nama = localStorage.getItem('cfg_store_name');
+        if(localStorage.getItem('cfg_store_address')) config.alamat = localStorage.getItem('cfg_store_address');
+
+        // Set value input di pengaturan sesuai config saat ini
+        document.getElementById("leaderLimitSetting").value = leaderLimit;
+        document.getElementById("rewardRateSetting").value = rewardRate;
+        document.getElementById("cfgStoreName").value = config.nama;
+        document.getElementById("cfgStoreAddress").value = config.alamat;
+
+        // --- FUNGSI FORMAT RUPIAH / NOMINAL REALTIME ---
+        function formatRibuan(angka) {
+            let number_string = angka.replace(/[^,\d]/g, '').toString(),
+            split = number_string.split(','),
+            sisa = split[0].length % 3,
+            rupiah = split[0].substr(0, sisa),
+            ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+            if (ribuan) {
+                let separator = sisa ? '.' : '';
+                rupiah += separator + ribuan.join('.');
+            }
+            rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+            return rupiah;
+        }
+
+        function hancurkanFormat(rupiahStr) {
+            if(!rupiahStr) return 0;
+            return parseInt(rupiahStr.replace(/[^0-9]/g, '')) || 0;
+        }
+
+        function formatMataUang(num) {
+            return "Rp " + (parseInt(num) || 0).toLocaleString('id-ID');
+        }
+
+        // Event listener nominal input agar otomatis terformat titik (1.000) real-time
+        document.getElementById("nominalInput").addEventListener("input", function(e) {
+            let pos = this.selectionStart;
+            let lenOld = this.value.length;
+            this.value = formatRibuan(this.value);
+            let lenNew = this.value.length;
+            this.setSelectionRange(pos + (lenNew - lenOld), pos + (lenNew - lenOld));
+        });
+
+        // --- CLOCK & AUTO-GENERATE KODE SISTEM "TI000001" ---
+        setInterval(() => {
+            const n = new Date();
+            document.getElementById("liveClock").innerText = n.toLocaleTimeString('id-ID');
+        }, 1000);
+
+        // Fungsi membuat kode TI000001 mengikuti angka urutan terbesar terakhir
+        function generateOtomatisKodeMember() {
+            let maxNum = 0;
+            members.forEach(m => {
+                if(m.id && m.id.startsWith("TI")) {
+                    let numPart = parseInt(m.id.substring(2)) || 0;
+                    if(numPart > maxNum) maxNum = numPart;
+                }
+            });
+            let nextNum = maxNum + 1;
+            let stringNum = nextNum.toString().padStart(6, '0');
+            document.getElementById("newMemberCode").value = "TI" + stringNum;
+        }
+
+        // Trigger Tombol Reload Kode agar mengisi ulang otomatis sesuai urutan data terakhir
+        document.getElementById("reloadCodeBtn").onclick = () => {
+            generateOtomatisKodeMember();
+            showToast("Kode otomatis berhasil diperbarui!");
+        };
+
+        // --- TOAST NOTIFICATION SYSTEM ---
+        function showToast(msg, isDanger = false) {
+            const toast = document.getElementById("toastNotif");
+            toast.innerText = msg;
+            toast.style.borderLeftColor = isDanger ? "#ff6b8b" : "#0ff0c0";
+            toast.classList.add("show");
+            setTimeout(() => toast.classList.remove("show"), 2500);
+        }
+
+        // --- DATA INTERACTION (LOCAL STORAGE) ---
+        function loadData() {
+            try {
+                const localM = localStorage.getItem(STORAGE_KEY);
+                const localA = localStorage.getItem('toko_ikhsan_activities');
+                
+                members = localM ? JSON.parse(localM) : [];
+                globalActivities = localA ? JSON.parse(localA) : [];
+
+                // Validasi & Inisialisasi struktur internal baru yang terpisah
+                members.forEach(m => {
+                    if (!m.transactions) m.transactions = [];
+                    if (!m.withdrawHistory) m.withdrawHistory = [];
+                    
+                    if (m.totalBelanjaSelamanya === undefined) {
+                        m.totalBelanjaSelamanya = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+                    }
+                    if (m.totalBelanjaSetelahWithdrawTerakhir === undefined) {
+                        m.totalBelanjaSetelahWithdrawTerakhir = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+                    }
+                    if (m.transaksiTerbanyakNominal === undefined) {
+                        let maxNom = 0, maxDate = "-";
+                        m.transactions.forEach(t => {
+                            if (t.nominal > maxNom) {
+                                maxNom = t.nominal;
+                                maxDate = t.dateTime;
+                            }
+                        });
+                        m.transaksiTerbanyakNominal = maxNom;
+                        m.transaksiTerbanyakTanggal = maxDate;
+                    }
+                    if (m.points === undefined) {
+                        let totalBelanjaAktif = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+                        m.points = Math.floor(totalBelanjaAktif * (rewardRate / 100));
+                    }
+                });
+            } catch(e) {
+                console.error("Gagal load database", e);
+                members = [];
+                globalActivities = [];
+            }
+        }
+
+        function saveData() {
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(members));
+            localStorage.setItem('toko_ikhsan_activities', JSON.stringify(globalActivities));
+            refreshDashboardStats();
+        }
+
+        function refreshDashboardStats() {
+            document.getElementById("totalMember").innerText = members.length;
+            let totalHitungTrans = 0;
+            members.forEach(m => {
+                totalHitungTrans += m.transactions.length;
+            });
+            document.getElementById("totalTrans").innerText = totalHitungTrans;
+        }
+
+        function catatAktivitasGlobal(text, idTx = null) {
+            const sekarang = new Date().toLocaleString('id-ID');
+            globalActivities.unshift({
+                id: idTx || 'ACT_' + Date.now() + '_' + Math.floor(Math.random() * 1000),
+                waktu: sekarang,
+                log: text
+            });
+            if(globalActivities.length > 100) globalActivities.pop();
+            renderGlobalActivities();
+        }
+
+        // --- RENDER MANAJEMEN KELOLA MEMBER PANEL ---
+        function renderKelolaMemberList() {
+            const container = document.getElementById("memberListContainer");
+            container.innerHTML = "";
+            if(members.length === 0) {
+                container.innerHTML = `<div style='text-align:center; color:var(--text-dim); padding:20px;'>Belum ada member terdaftar.</div>`;
+                return;
+            }
+
+            members.forEach(m => {
+                let belanjaAktif = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+                
+                const card = document.createElement("div");
+                card.className = "member-card";
+                card.innerHTML = `
+                    <div class="member-info">
+                        <span class="member-id">${escapeHtml(m.id)}</span>
+                        <div class="member-name">${escapeHtml(m.name)}</div>
+                        <div class="member-stats">
+                            <span style="font-size: 13px; background: rgba(255,217,102,0.15); padding: 2px 10px; border-radius: 20px;"><b style="color:#ffd966">🏆 Reward: ${formatMataUang(m.points)}</b></span>
+                            <span>Belanja Berjalan: <b>${formatMataUang(belanjaAktif)}</b></span>
+                            <span>Total Belanja Sepanjang Masa: <b style="color:#0ff0c0">${formatMataUang(m.totalBelanjaSelamanya)}</b></span>
+                        </div>
+                    </div>
+                    <div class="flex-row">
+                        <button class="btn-neon btn-sm action-pilih" data-id="${m.id}">🎯 Pilih</button>
+                        <button class="btn-neon btn-sm btn-danger action-hapus" data-id="${m.id}">🗑️ Hapus</button>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+
+            container.querySelectorAll(".action-pilih").forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const targetId = btn.getAttribute("data-id");
+                    const found = members.find(m => m.id === targetId);
+                    if(found) {
+                        currentSelectedMember = found;
+                        document.getElementById("selectedCard").style.display = "block";
+                        document.getElementById("selectedName").innerText = found.name;
+                        document.getElementById("selectedCode").innerText = found.id;
+                        switchPanel("dashboard");
+                        showToast(`Member ${found.name} dipilih!`);
+                        document.getElementById("nominalInput").focus();
+                    }
+                };
+            });
+
+            container.querySelectorAll(".action-hapus").forEach(btn => {
+                btn.onclick = (e) => {
+                    e.stopPropagation();
+                    const targetId = btn.getAttribute("data-id");
+                    if(confirm(`Apakah Anda yakin ingin menghapus member [${targetId}] secara permanen?`)) {
+                        const idx = members.findIndex(m => m.id === targetId);
+                        if(idx !== -1) {
+                            catatAktivitasGlobal(`Menghapus member ${members[idx].name} (${members[idx].id})`);
+                            if(currentSelectedMember && currentSelectedMember.id === targetId) {
+                                currentSelectedMember = null;
+                                document.getElementById("selectedCard").style.display = "none";
+                            }
+                            if(currentWithdrawMember && currentWithdrawMember.id === targetId) {
+                                currentWithdrawMember = null;
+                                document.getElementById("withdrawDetailArea").style.display = "none";
+                                document.getElementById("selectedWithdrawMember").innerText = "Belum ada member dipilih";
+                            }
+                            members.splice(idx, 1);
+                            saveData();
+                            renderKelolaMemberList();
+                            generateOtomatisKodeMember();
+                            showToast("Member berhasil dihapus!", true);
+                        }
+                    }
+                };
+            });
+        }
+
+        // --- RENDER DAFTAR RIWAYAT MEMBER & MODAL DETAIL ---
+        function renderDaftarMemberList() {
+            const container = document.getElementById("daftarMemberListContainer");
+            container.innerHTML = "";
+
+            let filtered = members.filter(m => {
+                let q = currentDaftarQuery.toLowerCase();
+                return m.name.toLowerCase().includes(q) || m.id.toLowerCase().includes(q);
+            });
+
+            if(filtered.length === 0) {
+                container.innerHTML = `<div style='text-align:center; color:var(--text-dim); padding:20px;'>Tidak ada member yang cocok dengan pencarian.</div>`;
+                return;
+            }
+
+            filtered.forEach(m => {
+                const item = document.createElement("div");
+                item.className = "member-card";
+                item.style.borderLeftColor = "#c084fc";
+                item.innerHTML = `
+                    <div class="member-info">
+                        <span class="member-id" style="background:#221435; color:#c084fc;">${escapeHtml(m.id)}</span>
+                        <div class="member-name">${escapeHtml(m.name)}</div>
+                        <div class="member-stats">
+                            <span>Transaksi Berjalan: <b>${m.transactions.length} kali</b></span>
+                            <span>Total Akumulasi: <b style="color:#0ff0c0">${formatMataUang(m.totalBelanjaSelamanya)}</b></span>
+                            <span>Belanja Terbanyak: <b style="color:#ffd966">${formatMataUang(m.transaksiTerbanyakNominal)}</b> (${m.transaksiTerbanyakTanggal})</span>
+                        </div>
+                    </div>
+                    <button class="btn-neon btn-sm action-detail" data-id="${m.id}">👁️ Lihat Detail</button>
+                `;
+                container.appendChild(item);
+            });
+
+            container.querySelectorAll(".action-detail").forEach(btn => {
+                btn.onclick = () => {
+                    const found = members.find(m => m.id === btn.getAttribute("data-id"));
+                    if(found) bukaModalDetailMember(found);
+                };
+            });
+        }
+
+        function bukaModalDetailMember(m) {
+            document.getElementById("modalMemberTitle").innerText = `Riwayat: ${m.name} (${m.id})`;
+            const stats = document.getElementById("modalMemberStats");
+            let belanjaAktif = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+
+            stats.innerHTML = `
+                <div class="stat-card"><h5>Reward Saat Ini</h5><p style="color:#ffd966;font-size:16px;font-weight:bold;">${formatMataUang(m.points)}</p></div>
+                <div class="stat-card"><h5>Belanja Berjalan</h5><p style="color:#0ff0c0;font-size:16px;font-weight:bold;">${formatMataUang(belanjaAktif)}</p></div>
+                <div class="stat-card"><h5>Belanja Sepanjang Masa</h5><p style="color:#eef5ff;font-size:16px;font-weight:bold;">${formatMataUang(m.totalBelanjaSelamanya)}</p></div>
+                <div class="stat-card"><h5>Belanja Pasca Withdraw</h5><p style="color:#aac9ff;font-size:16px;font-weight:bold;">${formatMataUang(m.totalBelanjaSetelahWithdrawTerakhir)}</p></div>
+            `;
+
+            renderModalTransactionList(m);
+            document.getElementById("detailMemberModal").classList.add("active");
+        }
+
+        // Render list transaksi di dalam modal detail dengan fitur EDIT & HAPUS per transaksi
+        function renderModalTransactionList(m) {
+            const listTx = document.getElementById("modalTransactionList");
+            listTx.innerHTML = "";
+            if(m.transactions.length === 0) {
+                listTx.innerHTML = "<div style='color:var(--text-dim); text-align:center; font-size:12px; padding:10px;'>Tidak ada antrean transaksi aktif saat ini. Semua data sudah di-reset pasca withdraw.</div>";
+            } else {
+                m.transactions.forEach((t, idx) => {
+                    let div = document.createElement("div");
+                    div.className = "activity-item log-row-item";
+                    div.innerHTML = `
+                        <div style="flex:1;">
+                            <small style='color:var(--text-dim)'>${t.dateTime}</small> 
+                            <div style='font-weight:bold; color:#0ff0c0;'>${formatMataUang(t.nominal)}</div>
+                        </div>
+                        <div style="display:flex; gap:6px;">
+                            <button class="btn-neon btn-sm btn-warning btn-edit-tx" data-member-id="${m.id}" data-idx="${idx}">✏️ Edit</button>
+                            <button class="btn-neon btn-sm btn-danger btn-del-tx" data-member-id="${m.id}" data-idx="${idx}">🗑️ Hapus</button>
+                        </div>
+                    `;
+                    listTx.appendChild(div);
+                });
+
+                // Handler Aksi Hapus Per Transaksi
+                listTx.querySelectorAll(".btn-del-tx").forEach(btn => {
+                    btn.onclick = () => {
+                        const mId = btn.getAttribute("data-member-id");
+                        const txIdx = parseInt(btn.getAttribute("data-idx"));
+                        const foundM = members.find(mem => mem.id === mId);
+                        
+                        if(foundM && confirm("Hapus transaksi ini? Poin reward dan statistik belanja akan dihitung ulang secara otomatis.")) {
+                            const deletedTx = foundM.transactions[txIdx];
+                            
+                            // Kurangi poin & akumulasi statistik mandiri
+                            let bPoin = Math.floor(deletedTx.nominal * (rewardRate / 100));
+                            foundM.points = Math.max(0, foundM.points - bPoin);
+                            foundM.totalBelanjaSelamanya = Math.max(0, foundM.totalBelanjaSelamanya - deletedTx.nominal);
+                            foundM.totalBelanjaSetelahWithdrawTerakhir = Math.max(0, foundM.totalBelanjaSetelahWithdrawTerakhir - deletedTx.nominal);
+
+                            // Hapus juga dari log aktivitas global jika id/waktu cocok
+                            globalActivities = globalActivities.filter(act => !act.log.includes(foundM.name) || !act.log.includes(formatMataUang(deletedTx.nominal)));
+
+                            // Hapus item dari array transaksi internal member
+                            foundM.transactions.splice(txIdx, 1);
+
+                            // Rekalkulasi rekor belanja terbesar
+                            let maxNom = 0, maxDate = "-";
+                            foundM.transactions.forEach(tx => {
+                                if (tx.nominal > maxNom) { maxNom = tx.nominal; maxDate = tx.dateTime; }
+                            });
+                            foundM.transaksiTerbanyakNominal = maxNom;
+                            foundM.transaksiTerbanyakTanggal = maxDate;
+
+                            catatAktivitasGlobal(`Menghapus transaksi salah input: ${foundM.name} sebesar ${formatMataUang(deletedTx.nominal)}`);
+                            saveData();
+                            bukaModalDetailMember(foundM); // Re-render isi modal
+                            renderGlobalActivities();
+                            showToast("Transaksi berhasil dihapus & di-kalkulasi ulang!", true);
+                        }
+                    };
+                });
+
+                // Handler Aksi Edit Nominal Per Transaksi
+                listTx.querySelectorAll(".btn-edit-tx").forEach(btn => {
+                    btn.onclick = () => {
+                        const mId = btn.getAttribute("data-member-id");
+                        const txIdx = parseInt(btn.getAttribute("data-idx"));
+                        const foundM = members.find(mem => mem.id === mId);
+                        
+                        if(foundM) {
+                            const oldTx = foundM.transactions[txIdx];
+                            let newNomStr = prompt(`Masukkan Nominal Baru Untuk Transaksi Tanggal ${oldTx.dateTime}:`, oldTx.nominal);
+                            if(newNomStr === null) return; // Batal klik cancel
+                            
+                            let newNom = parseInt(newNomStr.replace(/[^0-9]/g, '')) || 0;
+                            if(newNom <= 0) {
+                                showToast("Nominal edit tidak valid!", true);
+                                return;
+                            }
+
+                            // Kembalikan/kurangi statistik lama, lalu tambahkan nominal statistik baru
+                            let oldPoin = Math.floor(oldTx.nominal * (rewardRate / 100));
+                            let newPoin = Math.floor(newNom * (rewardRate / 100));
+
+                            foundM.points = Math.max(0, foundM.points - oldPoin) + newPoin;
+                            foundM.totalBelanjaSelamanya = Math.max(0, foundM.totalBelanjaSelamanya - oldTx.nominal) + newNom;
+                            foundM.totalBelanjaSetelahWithdrawTerakhir = Math.max(0, foundM.totalBelanjaSetelahWithdrawTerakhir - oldTx.nominal) + newNom;
+
+                            // Update nilai transaksi utama
+                            const oldNominalTeks = formatMataUang(oldTx.nominal);
+                            oldTx.nominal = newNom;
+
+                            // Rekalkulasi rekor belanja terbesar
+                            let maxNom = 0, maxDate = "-";
+                            foundM.transactions.forEach(tx => {
+                                if (tx.nominal > maxNom) { maxNom = tx.nominal; maxDate = tx.dateTime; }
+                            });
+                            foundM.transaksiTerbanyakNominal = maxNom;
+                            foundM.transaksiTerbanyakTanggal = maxDate;
+
+                            catatAktivitasGlobal(`Mengubah nominal transaksi ${foundM.name}: Dari ${oldNominalTeks} menjadi ${formatMataUang(newNom)}`);
+                            saveData();
+                            bukaModalDetailMember(foundM);
+                            renderGlobalActivities();
+                            showToast("Nominal transaksi berhasil diperbarui!");
+                        }
+                    };
+                });
+            }
+        }
+
+        // --- CLOSING MODALS LOGIC ---
+        document.getElementById("closeDetailModal").onclick = () => {
+            document.getElementById("detailMemberModal").classList.remove("active");
+            const activeMenu = document.querySelector(".menu-active").getAttribute("data-menu");
+            if (activeMenu === "daftar") renderDaftarMemberList();
+        };
+        document.getElementById("closeSearchOverlay").onclick = () => {
+            document.getElementById("searchOverlayModal").classList.remove("active");
+        };
+
+        // --- RENDER AKTIVITAS GLOBAL PANEL ---
+        function renderGlobalActivities() {
+            const list = document.getElementById("globalActivityList");
+            list.innerHTML = "";
+            if(globalActivities.length === 0) {
+                list.innerHTML = "<div style='color:var(--text-dim); text-align:center; padding:20px;'>Belum ada rekaman aktivitas log terbaru.</div>";
+                return;
+            }
+            globalActivities.forEach((a, index) => {
+                let div = document.createElement("div");
+                div.className = "activity-item log-row-item";
+                div.innerHTML = `
+                    <div style="flex:1;">
+                        <small style="color:#ffb86b; font-family:monospace;">[${a.waktu}]</small> 
+                        <span style="margin-left:8px; color:#eef5ff;">${escapeHtml(a.log)}</span>
+                    </div>
+                    <button class="btn-neon btn-sm btn-danger btn-del-global-log" data-idx="${index}">🗑️</button>
+                `;
+                list.appendChild(div);
+            });
+
+            list.querySelectorAll(".btn-del-global-log").forEach(btn => {
+                btn.onclick = () => {
+                    const idx = parseInt(btn.getAttribute("data-idx"));
+                    if(confirm("Hapus baris log aktivitas global ini dari tampilan log? (Tindakan ini tidak memengaruhi saldo belanja/reward member)")) {
+                        globalActivities.splice(idx, 1);
+                        localStorage.setItem('toko_ikhsan_activities', JSON.stringify(globalActivities));
+                        renderGlobalActivities();
+                        showToast("Baris log berhasil dihapus!", true);
+                    }
+                };
+            });
+        }
+
+        // --- RENDER TOP LEADERBOARD PANEL ---
+        function renderLeaderboard() {
+            const container = document.getElementById("leaderListContainer");
+            container.innerHTML = "";
+
+            let sorted = [...members].sort((a, b) => b.points - a.points).slice(0, leaderLimit);
+
+            if(sorted.length === 0) {
+                container.innerHTML = "<div style='color:var(--text-dim); text-align:center; padding:20px;'>Data member masih kosong.</div>";
+                return;
+            }
+
+            sorted.forEach((m, index) => {
+                let rankClass = "";
+                let medal = "🏅";
+                if(index === 0) { rankClass = "gold-rank"; medal = "🥇 SUPER GOLD"; }
+                else if(index === 1) { rankClass = "silver-rank"; medal = "🥈 SILVER"; }
+                else if(index === 2) { rankClass = "bronze-rank"; medal = "🥉 BRONZE"; }
+
+                let div = document.createElement("div");
+                div.className = `leaderboard-card ${rankClass}`;
+                div.innerHTML = `
+                    <div>
+                        <span style="font-weight:900; color:#ffb86b; font-size:18px; margin-right:10px;">#${index+1}</span>
+                        <span class="member-id">${escapeHtml(m.id)}</span>
+                        <div style="font-size:18px; font-weight:bold; margin-top:4px;">${escapeHtml(m.name)}</div>
+                    </div>
+                    <div style="text-align:right;">
+                        <div style="font-size:11px; color:var(--text-dim); font-weight:600;">${medal}</div>
+                        <div style="font-size:18px; font-weight:900; color:#ffd966; background: rgba(255,217,102,0.1); padding: 2px 12px; border-radius: 30px; margin-top:4px;">Reward: ${formatMataUang(m.points)}</div>
+                    </div>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // --- PANEL GRAPHIC CHART TRANSACTION DATA ---
+        function renderStatistikGrafik() {
+            let records = {};
+            members.forEach(m => {
+                m.transactions.forEach(t => {
+                    let tgl = t.dateTime.split(" ")[0];
+                    records[tgl] = (records[tgl] || 0) + t.nominal;
+                });
+            });
+
+            let sortableDates = Object.keys(records).sort();
+            let totalOmzetSum = 0;
+            let dataPoints = [];
+
+            sortableDates.forEach(d => {
+                totalOmzetSum += records[d];
+                dataPoints.push(records[d]);
+            });
+
+            document.getElementById("totalOmzet").innerText = formatMataUang(totalOmzetSum);
+            document.getElementById("totalDaysActive").innerText = sortableDates.length;
+            let rata = sortableDates.length > 0 ? Math.floor(totalOmzetSum / sortableDates.length) : 0;
+            document.getElementById("avgDaily").innerText = formatMataUang(rata);
+
+            if(dailyChartInstance) {
+                dailyChartInstance.destroy();
+            }
+
+            const ctx = document.getElementById("dailyChart").getContext("2d");
+            dailyChartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: sortableDates,
+                    datasets: [{
+                        label: 'Omzet Harian (Rp)',
+                        data: dataPoints,
+                        borderColor: '#0ff0c0',
+                        backgroundColor: 'rgba(15, 240, 192, 0.1)',
+                        borderWidth: 3,
+                        pointBackgroundColor: '#ffb86b',
+                        tension: 0.2,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            ticks: { color: '#aac9ff' },
+                            grid: { color: 'rgba(170,201,255,0.1)' }
+                        },
+                        x: {
+                            ticks: { color: '#aac9ff' },
+                            grid: { color: 'rgba(170,201,255,0.1)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { labels: { color: '#eef5ff' } }
+                    }
+                }
+            });
+        }
+
+        // Zoom grafik kontrol
+        let currentScale = 1;
+        document.getElementById("zoomInBtn").onclick = () => {
+            currentScale += 0.15;
+            document.getElementById("chartWrapper").style.transform = `scaleX(${currentScale})`;
+        };
+        document.getElementById("zoomOutBtn").onclick = () => {
+            if(currentScale > 0.6) {
+                currentScale -= 0.15;
+                document.getElementById("chartWrapper").style.transform = `scaleX(${currentScale})`;
+            }
+        };
+        document.getElementById("resetZoomBtn").onclick = () => {
+            currentScale = 1;
+            document.getElementById("chartWrapper").style.transform = `scaleX(1)`;
+        };
+
+        // --- RENDER WITHDRAW PANEL AREA ---
+        function renderWithdrawArea() {
+            if(!currentWithdrawMember) return;
+            const m = currentWithdrawMember;
+            let belanjaAktif = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+
+            const grid = document.getElementById("withdrawStatsGrid");
+            grid.innerHTML = `
+                <div class="stat-card"><h5>Reward Tersedia</h5><p style="color:#ffd966; font-size:18px; font-weight:bold;">${formatMataUang(m.points)}</p></div>
+                <div class="stat-card"><h5>Belanja Berjalan</h5><p style="color:#0ff0c0; font-size:16px; font-weight:bold;">${formatMataUang(belanjaAktif)}</p></div>
+                <div class="stat-card"><h5>Total Belanja Selamanya</h5><p style="font-size:16px; font-weight:bold;">${formatMataUang(m.totalBelanjaSelamanya)}</p></div>
+                <div class="stat-card"><h5>Belanja Pasca Withdraw</h5><p style="color:#aac9ff; font-size:16px;font-weight:bold;">${formatMataUang(m.totalBelanjaSetelahWithdrawTerakhir)}</p></div>
+            `;
+
+            let estimasiRupiahReward = m.points; 
+            const infoBox = document.getElementById("rewardInfoBox");
+            infoBox.innerHTML = `
+                <div style="font-size:12px; color:var(--text-dim);">SALDO REWARD UTAMA YANG BISA CAIR</div>
+                <div class="reward-value">🏆 Reward: ${formatMataUang(estimasiRupiahReward)}</div>
+                <div style="font-size:11px; color:#ffb86b; margin-top:4px;">* Skema integrasi finansial berbasis persentase belanja riil (${rewardRate}%)</div>
+            `;
+
+            const histList = document.getElementById("withdrawHistoryList");
+            histList.innerHTML = "";
+            if(!m.withdrawHistory || m.withdrawHistory.length === 0) {
+                histList.innerHTML = "<div style='color:var(--text-dim); text-align:center; font-size:12px; padding:10px;'>Member belum pernah melakukan penarikan reward.</div>";
+            } else {
+                m.withdrawHistory.forEach(h => {
+                    let div = document.createElement("div");
+                    div.className = "withdraw-history-item";
+                    div.innerHTML = `
+                        <div>
+                            <span style="font-weight:bold; color:#ffaa33;">💸 Terambil: -${formatMataUang(h.nominalDitarik)}</span>
+                            <div style="font-size:10px; color:var(--text-dim);">${h.waktu}</div>
+                        </div>
+                        <div style="text-align:right; font-size:11px;">
+                            <div>Sisa Reward: ${formatMataUang(h.sisaPoinStlhWithdraw)}</div>
+                        </div>
+                    `;
+                    histList.appendChild(div);
+                });
+            }
+        }
+
+        // --- EVENT HANDLER PILIH MEMBER DI WITHDRAW ---
+        document.getElementById("withdrawSelectBtn").onclick = () => {
+            let q = document.getElementById("withdrawSearchInput").value.trim().toLowerCase();
+            if(!q) { showToast("Ketik nama atau kode member terlebih dahulu!", true); return; }
+
+            let matches = members.filter(m => m.name.toLowerCase().includes(q) || m.id.toLowerCase().includes(q));
+            if(matches.length === 0) {
+                showToast("Member tidak ditemukan!", true);
+                currentWithdrawMember = null;
+                document.getElementById("withdrawDetailArea").style.display = "none";
+                document.getElementById("selectedWithdrawMember").innerText = "Belum ada member dipilih";
+            } else if(matches.length === 1) {
+                pilihMemberUntukWithdraw(matches[0]);
+            } else {
+                const overlayList = document.getElementById("searchOverlayList");
+                overlayList.innerHTML = "";
+                matches.forEach(m => {
+                    let div = document.createElement("div");
+                    div.className = "overlay-item";
+                    div.innerHTML = `<b>${m.name}</b> <span style="float:right; font-family:monospace; color:#0ff0c0;">${m.id}</span>`;
+                    div.onclick = () => {
+                        pilihMemberUntukWithdraw(m);
+                        document.getElementById("searchOverlayModal").classList.remove("active");
+                    };
+                    overlayList.appendChild(div);
+                });
+                document.getElementById("searchOverlayModal").classList.add("active");
+            }
+        };
+
+        function pilihMemberUntukWithdraw(m) {
+            currentWithdrawMember = m;
+            document.getElementById("selectedWithdrawMember").innerHTML = `
+                <div style="color:#0ff0c0; font-weight:bold; font-size:16px;">${escapeHtml(m.name)}</div>
+                <div style="font-family:monospace; font-size:12px;">ID: ${escapeHtml(m.id)}</div>
+            `;
+            document.getElementById("withdrawDetailArea").style.display = "block";
+            renderWithdrawArea();
+            showToast(`Berhasil memilih ${m.name}`);
+        }
+
+        // --- PROSES EKSEKUSI WITHDRAW REWARD & RESET DATA ---
+        document.getElementById("doWithdrawBtn").onclick = () => {
+            if(!currentWithdrawMember) return;
+            let inputAmt = parseInt(document.getElementById("withdrawAmountInput").value) || 0;
+            let maxRewardAvailable = currentWithdrawMember.points;
+
+            if(inputAmt <= 0) {
+                showToast("Nominal penarikan withdraw harus lebih besar dari Rp 0!", true);
+                return;
+            }
+            if(inputAmt > maxRewardAvailable) {
+                showToast(`Saldo reward tidak mencukupi! Maksimal penarikan: ${formatMataUang(maxRewardAvailable)}`, true);
+                return;
+            }
+
+            if(confirm(`Konfirmasi penarikan reward sebesar ${formatMataUang(inputAmt)} untuk member ${currentWithdrawMember.name}?\n\n* PERINGATAN: Antrean list transaksi aktif dan saldo berjalan member akan di-reset menjadi 0 pasca withdraw!`)) {
+                
+                // Kurangi Poin Utama Member
+                currentWithdrawMember.points -= inputAmt;
+
+                // Dorong data ke array history penarikan withdraw member
+                if(!currentWithdrawMember.withdrawHistory) currentWithdrawMember.withdrawHistory = [];
+                currentWithdrawMember.withdrawHistory.unshift({
+                    waktu: new Date().toLocaleString('id-ID'),
+                    nominalDitarik: inputAmt,
+                    sisaPoinStlhWithdraw: currentWithdrawMember.points
+                });
+
+                // CORE RESET: Kosongkan array list transaksi & reset akumulasi belanja setelah withdraw berjalan
+                currentWithdrawMember.transactions = [];
+                currentWithdrawMember.totalBelanjaSetelahWithdrawTerakhir = 0;
+
+                catatAktivitasGlobal(`Withdraw Reward Berhasil: ${currentWithdrawMember.name} menarik ${formatMataUang(inputAmt)}`);
+
+                saveData();
+                
+                renderWithdrawArea();
+                document.getElementById("withdrawAmountInput").value = "";
+                showToast(`Sukses Withdraw ${formatMataUang(inputAmt)}! Transaksi di-reset.`);
+            }
+        };
+
+        // --- INTERFACES PANGGILAN FUNGSI CETAK STATISTIK MEMBER INDEPENDEN ---
+        document.getElementById("printMemberStatsBtn").onclick = () => {
+            if(!currentWithdrawMember) return;
+            
+            // Siapkan parameter dataToko dan member sesuai spesifikasi fungsi baru Anda
+            const infoToko = { 
+                nama: config.nama, 
+                alamat: config.alamat 
+            };
+            
+            const dataMember = {
+                name: currentWithdrawMember.name,
+                code: currentWithdrawMember.id,
+                rewardBalance: currentWithdrawMember.points,
+                transactions: currentWithdrawMember.transactions.map(t => ({
+                    date: t.dateTime ? t.dateTime.split(" ")[0] : new Date().toISOString().substring(0,10),
+                    nominal: t.nominal
+                }))
+            };
+
+            // Panggil fungsi utama independen yang baru saja ditambahkan
+            cetakStatistikMember(infoToko, dataMember);
+            catatAktivitasGlobal(`Mencetak Struk Statistik Baru (Window Driver Popup): ${currentWithdrawMember.name}`);
+        };
+
+        // --- SIMPAN TRANSAKSI BARU VIA DASHBOARD PANEL ---
+        document.getElementById("simpanBtn").onclick = () => {
+    // 1. Validasi Member
+    if (!currentSelectedMember) {
+        showToast("❌ Pilih member dulu", true);
+        document.getElementById("searchInputDash").focus();
+        return;
+    }
+
+    // 2. Validasi & Parsing Nominal
+    let raw = document.getElementById("nominalInput").value;
+    let nominal = parseInt(raw.replace(/[^0-9]/g, ""));
+    if (isNaN(nominal) || nominal <= 0) {
+        showToast("❌ Nominal positif", true);
+        document.getElementById("nominalInput").focus();
+        return;
+    }
+
+    // 3. Proses Transaksi
+    const skrg = new Date().toLocaleString('id-ID');
+    currentSelectedMember.transactions.push({ dateTime: skrg, nominal: nominal });
+    currentSelectedMember.totalBelanjaSelamanya += nominal;
+    currentSelectedMember.totalBelanjaSetelahWithdrawTerakhir += nominal;
+    if (nominal > currentSelectedMember.transaksiTerbanyakNominal) {
+        currentSelectedMember.transaksiTerbanyakNominal = nominal;
+        currentSelectedMember.transaksiTerbanyakTanggal = skrg;
+    }
+    let bonusPoinBaru = Math.floor(nominal * (rewardRate / 100));
+    currentSelectedMember.points += bonusPoinBaru;
+
+    catatAktivitasGlobal(`Transaksi Baru: ${currentSelectedMember.name} belanja ${formatMataUang(nominal)}`);
+    saveData();
+
+    // 4. Reset State
+    currentSelectedMember = null;
+    sessionStorage.removeItem("current_selected_member_id");
+
+    // 5. Reset UI (Tampilan)
+    document.getElementById("nominalInput").value = "";
+    document.getElementById("searchInputDash").value = "";
+    
+    // Inilah perintah yang membuat kartu member hilang dari layar:
+    const selectedCard = document.getElementById("selectedCard");
+    if (selectedCard) selectedCard.style.display = "none";
+    
+    const selectedName = document.getElementById("selectedName");
+    if (selectedName) selectedName.innerText = "";
+    
+    const selectedCode = document.getElementById("selectedCode");
+    if (selectedCode) selectedCode.innerText = "";
+
+    document.getElementById("searchInputDash").focus();
+    showToast("✅ Transaksi tersimpan & Member dilepas", false);
+};
+
+        // --- SEARCH INPUT DASHBOARD AUTO-COMPLETE ENTER HANDLER ---
+        document.getElementById("searchInputDash").onkeydown = (e) => {
+            if(e.key === "Enter") {
+                let q = e.target.value.trim().toLowerCase();
+                if(!q) return;
+                let matches = members.filter(m => m.name.toLowerCase().includes(q) || m.id.toLowerCase().includes(q));
+                if(matches.length === 0) {
+                    showToast("Member tidak ditemukan!", true);
+                    currentSelectedMember = null;
+                    document.getElementById("selectedCard").style.display = "none";
+                } else if(matches.length === 1) {
+                    currentSelectedMember = matches[0];
+                    document.getElementById("selectedCard").style.display = "block";
+                    document.getElementById("selectedName").innerText = matches[0].name;
+                    document.getElementById("selectedCode").innerText = matches[0].id;
+                    e.target.value = "";
+                    showToast(`Member ${matches[0].name} terpilih!`);
+                    document.getElementById("nominalInput").focus();
+                } else {
+                    const overlayList = document.getElementById("searchOverlayList");
+                    overlayList.innerHTML = "";
+                    matches.forEach(m => {
+                        let div = document.createElement("div");
+                        div.className = "overlay-item";
+                        div.innerHTML = `<b>${m.name}</b> <span style="float:right; font-family:monospace; color:#0ff0c0;">${m.id}</span>`;
+                        div.onclick = () => {
+                            currentSelectedMember = m;
+                            document.getElementById("selectedCard").style.display = "block";
+                            document.getElementById("selectedName").innerText = m.name;
+                            document.getElementById("selectedCode").innerText = m.id;
+                            document.getElementById("searchInputDash").value = "";
+                            document.getElementById("searchOverlayModal").classList.remove("active");
+                            document.getElementById("nominalInput").focus();
+                        };
+                        overlayList.appendChild(div);
+                    });
+                    document.getElementById("searchOverlayModal").classList.add("active");
+                }
+            }
+        };
+
+        document.getElementById("nominalInput").onkeydown = (e) => {
+            if(e.key === "Enter") document.getElementById("simpanBtn").click();
+        };
+
+        // --- ACTION REGISTER TAMBAH MEMBER BARU ---
+        document.getElementById("tambahMemberBtn").onclick = () => {
+            let codeIn = document.getElementById("newMemberCode").value.trim();
+            let nameIn = document.getElementById("newMemberName").value.trim();
+
+            if(!codeIn || !nameIn) {
+                showToast("Kode dan Nama Member wajib diisi lengkap!", true);
+                return;
+            }
+
+            if(members.some(m => m.id.toLowerCase() === codeIn.toLowerCase())) {
+                showToast("Kode member tersebut sudah terdaftar di sistem!", true);
+                return;
+            }
+
+            let objekMemberBaru = {
+                id: codeIn,
+                name: nameIn,
+                createdAt: new Date().toISOString().split("T")[0],
+                transactions: [],
+                withdrawHistory: [],
+                points: 0,
+                totalBelanjaSelamanya: 0,
+                totalBelanjaSetelahWithdrawTerakhir: 0,
+                transaksiTerbanyakNominal: 0,
+                transaksiTerbanyakTanggal: "-"
+            };
+
+            members.push(objekMemberBaru);
+            catatAktivitasGlobal(`Mendaftarkan member baru: ${nameIn} [${codeIn}]`);
+            saveData();
+
+            document.getElementById("newMemberName").value = "";
+            generateOtomatisKodeMember();
+            renderKelolaMemberList();
+            showToast(`Sukses mendaftarkan ${nameIn}!`);
+        };
+
+        // --- MANAGEMENT SETTINGS ACTIONS PANEL ---
+        document.getElementById("saveLeaderLimitBtn").onclick = () => {
+            let val = parseInt(document.getElementById("leaderLimitSetting").value) || 10;
+            if(val < 1) val = 1; if(val > 30) val = 30;
+            leaderLimit = val;
+            localStorage.setItem('leaderLimit', val);
+            showToast("Konfigurasi limit baris peringkat leaderboard berhasil disimpan!");
+        };
+
+        document.getElementById("saveRewardRateBtn").onclick = () => {
+            let val = parseFloat(document.getElementById("rewardRateSetting").value) || 0.5;
+            if(val < 0) val = 0;
+            rewardRate = val;
+            localStorage.setItem('rewardRate', val);
+            showToast("Persentase rasio perhitungan reward point berhasil diperbarui!");
+        };
+
+        document.getElementById("savePrintSettingsBtn").onclick = () => {
+            config.nama = document.getElementById("cfgStoreName").value.trim() || "TOKO IKHSAN";
+            config.alamat = document.getElementById("cfgStoreAddress").value.trim() || "Bekasi, Indonesia";
+            localStorage.setItem('cfg_store_name', config.nama);
+            localStorage.setItem('cfg_store_address', config.alamat);
+            showToast("Pengaturan data kustomisasi kop struk toko berhasil disimpan!");
+        };
+
+        document.getElementById("hardResetAllDataBtn").onclick = () => {
+            if(confirm("PERINGATAN SANGAT KRITIS!!\n\nApakah Anda benar-benar yakin ingin menghapus seluruh isi database LocalStorage secara permanen? Tindakan ini tidak dapat dibatalkan!")) {
+                localStorage.clear();
+                showToast("Seluruh isi LocalStorage dibersihkan total ke pengaturan awal!", true);
+                setTimeout(() => location.reload(), 1000);
+            }
+        };
+
+        // --- REALTIME SEARCH FILTER LIVE DAFTAR PANEL ---
+        const inputDaftar = document.getElementById("daftarSearchInput");
+        inputDaftar.addEventListener("input", (e) => {
+            currentDaftarQuery = e.target.value;
+            renderDaftarMemberList();
+        });
+        document.getElementById("daftarSearchBtn").onclick = () => {
+            currentDaftarQuery = inputDaftar.value;
+            renderDaftarMemberList();
+        };
+
+        // --- BACKUP DATABASE KE FILE JSON ---
+        document.getElementById("backupBtn").onclick = () => {
+            if(members.length === 0) { showToast("Gagal backup, data member masih kosong!", true); return; }
+            
+            let dataExport = {
+                v: "2.1-Final-Storage-With-RewardFix",
+                config: { leaderLimit, rewardRate, storeName: config.nama, storeAddress: config.alamat },
+                data: members
+            };
+
+            const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataExport, null, 2));
+            const dlAnchorElem = document.createElement('a');
+            dlAnchorElem.setAttribute("href", dataStr);
+            
+            let timeStampFile = new Date().toISOString().substring(0, 19).replace(/:/g, "_");
+            dlAnchorElem.setAttribute("download", `toko_ikhsan_backup_${timeStampFile}.json`);
+            dlAnchorElem.click();
+            showToast("File data JSON berhasil di-export!");
+        };
+
+        // --- IMPORT DATABASE DARI FILE JSON ---
+        document.getElementById("importFile").addEventListener("change", function(e) {
+            const files = e.target.files;
+            if (files.length <= 0) return;
+
+            const fr = new FileReader();
+            fr.onload = function(e) {
+                try {
+                    const parsed = JSON.parse(e.target.result);
+                    let arrayDataMentah = [];
+                    if (Array.isArray(parsed)) {
+                        arrayDataMentah = parsed;
+                    } else if (parsed && Array.isArray(parsed.data)) {
+                        arrayDataMentah = parsed.data;
+                        importedDataTemp = parsed;
+                    } else {
+                        showToast("Struktur file JSON tidak dikenal atau tidak didukung!", true);
+                        return;
+                    }
+
+                    if(arrayDataMentah.length > 0 && !arrayDataMentah[0].id) {
+                        showToast("Isi JSON tidak valid. Member harus memiliki ID!", true);
+                        return;
+                    }
+
+                    if (!importedDataTemp) {
+                        importedDataTemp = { data: arrayDataMentah };
+                    } else {
+                        importedDataTemp.data = arrayDataMentah;
+                    }
+
+                    document.getElementById("importConfirmBtn").style.display = "inline-flex";
+                    showToast("File JSON berhasil dibaca! Klik tombol orange Konfirmasi untuk memuat.");
+                } catch (err) {
+                    showToast("Gagal membaca file! Pastikan file adalah JSON yang valid.", true);
+                    console.error(err);
+                }
+            };
+            fr.readAsText(files[0]);
+        });
+
+        document.getElementById("importConfirmBtn").onclick = () => {
+            if(importedDataTemp && importedDataTemp.data) {
+                if(confirm("Apakah Anda yakin ingin menimpa data saat ini dengan data dari file JSON tersebut?")) {
+                    members = importedDataTemp.data;
+
+                    members.forEach(m => {
+                        if (!m.transactions) m.transactions = [];
+                        if (!m.withdrawHistory) m.withdrawHistory = [];
+                        
+                        let totalBelanjaAktif = m.transactions.reduce((sum, t) => sum + t.nominal, 0);
+
+                        if (m.totalBelanjaSelamanya === undefined || m.totalBelanjaSelamanya === 0) {
+                            m.totalBelanjaSelamanya = totalBelanjaAktif;
+                        }
+                        if (m.totalBelanjaSetelahWithdrawTerakhir === undefined || m.totalBelanjaSetelahWithdrawTerakhir === 0) {
+                            m.totalBelanjaSetelahWithdrawTerakhir = totalBelanjaAktif;
+                        }
+                        if (m.points === undefined || m.points === 0) {
+                            m.points = Math.floor(totalBelanjaAktif * (rewardRate / 100));
+                        }
+                        if (m.transaksiTerbanyakNominal === undefined || m.transaksiTerbanyakNominal === 0) {
+                            let maxNom = 0, maxDate = "-";
+                            m.transactions.forEach(t => {
+                                if (t.nominal > maxNom) {
+                                    maxNom = t.nominal;
+                                    maxDate = t.dateTime;
+                                }
+                            });
+                            m.transaksiTerbanyakNominal = maxNom;
+                            m.transaksiTerbanyakTanggal = maxDate;
+                        }
+                    });
+
+                    if(importedDataTemp.config) {
+                        if(importedDataTemp.config.leaderLimit) {
+                            leaderLimit = importedDataTemp.config.leaderLimit;
+                            localStorage.setItem('leaderLimit', leaderLimit);
+                            document.getElementById("leaderLimitSetting").value = leaderLimit;
+                        }
+                        if(importedDataTemp.config.rewardRate) {
+                            rewardRate = importedDataTemp.config.rewardRate;
+                            localStorage.setItem('rewardRate', rewardRate);
+                            document.getElementById("rewardRateSetting").value = rewardRate;
+                        }
+                    }
+
+                    saveData();
+                    showToast("Database dari file JSON berhasil diimport masuk!");
+                    document.getElementById("importConfirmBtn").style.display = "none";
+                    document.getElementById("importFile").value = "";
+                    importedDataTemp = null;
+                    renderKelolaMemberList();
+                    generateOtomatisKodeMember();
+                }
+            }
+        };
+
+        // --- TAB NAVIGATION PANEL MENU BAR SYSTEM ---
+        const menuItems = document.querySelectorAll(".menu-item");
+        const panels = document.querySelectorAll(".panel");
+
+        function switchPanel(menuName) {
+            menuItems.forEach(item => {
+                if(item.getAttribute("data-menu") === menuName) {
+                    item.classList.add("menu-active");
+                } else {
+                    item.classList.remove("menu-active");
+                }
+            });
+
+            panels.forEach(p => {
+                if(p.id === `${menuName}Panel`) {
+                    p.classList.add("active");
+                } else {
+                    p.classList.remove("active");
+                }
+            });
+
+            if(menuName === "members") renderKelolaMemberList();
+            if(menuName === "daftar") renderDaftarMemberList();
+            if(menuName === "global") renderGlobalActivities();
+            if(menuName === "statistik") renderStatistikGrafik();
+            if(menuName === "leader") renderLeaderboard();
+            if(menuName === "withdraw") renderWithdrawArea();
+        }
+
+        menuItems.forEach(item => {
+            item.onclick = () => {
+                switchPanel(item.getAttribute("data-menu"));
+            };
+        });
+
+        // --- SHORTCUTS KEYBOARD LISTENER FUNCTION (F2-F8) ---
+        window.onkeydown = (e) => {
+            if(e.key === "F2") { e.preventDefault(); switchPanel("dashboard"); }
+            if(e.key === "F3") { e.preventDefault(); switchPanel("members"); }
+            if(e.key === "F4") { e.preventDefault(); switchPanel("daftar"); }
+            if(e.key === "F5") { e.preventDefault(); switchPanel("statistik"); }
+            if(e.key === "F6") { e.preventDefault(); switchPanel("withdraw"); }
+            if(e.key === "F7") {
+                e.preventDefault();
+                const activeMenu = document.querySelector(".menu-active").getAttribute("data-menu");
+                if(activeMenu === "dashboard") document.getElementById("searchInputDash").focus();
+                if(activeMenu === "daftar") document.getElementById("daftarSearchInput").focus();
+                if(activeMenu === "withdraw") document.getElementById("withdrawSearchInput").focus();
+            }
+            if(e.key === "F8") {
+                e.preventDefault();
+                switchPanel("dashboard");
+                document.getElementById("nominalInput").focus();
+            }
+        };
+
+        document.getElementById("fabResetQuick").onclick = () => {
+            const activeMenu = document.querySelector(".menu-active").getAttribute("data-menu");
+            if(activeMenu === "dashboard") {
+                currentSelectedMember = null;
+                document.getElementById("selectedCard").style.display = "none";
+                document.getElementById("nominalInput").value = "";
+                document.getElementById("searchInputDash").value = "";
+                showToast("Pilihan transaksi dashboard di-reset bersih.");
+            } else if(activeMenu === "withdraw") {
+                currentWithdrawMember = null;
+                document.getElementById("withdrawDetailArea").style.display = "none";
+                document.getElementById("selectedWithdrawMember").innerText = "Belum ada member dipilih";
+                document.getElementById("withdrawSearchInput").value = "";
+                showToast("Pilihan penarikan withdraw di-reset bersih.");
+            } else {
+                showToast("Shortcut reset cepat tidak tersedia untuk halaman menu ini.");
+            }
+        };
+
+        function escapeHtml(text) {
+            if(!text) return '';
+            return text
+                .toString()
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+
+        loadData();
+        refreshDashboardStats();
+        generateOtomatisKodeMember();
+    });
+    </script>
+</body>
+</html>
